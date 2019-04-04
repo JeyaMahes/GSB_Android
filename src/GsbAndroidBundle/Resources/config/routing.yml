@@ -1,0 +1,9 @@
+gsb_android_homepage:
+    path:     /
+    defaults: { _controller: GsbAndroidBundle:Default:index }
+gsb_connexion:
+    path:     /connexion/{login}/{mdp}
+    defaults: { _controller: GsbAndroidBundle:Default:getUnVisiteur }
+
+    
+
