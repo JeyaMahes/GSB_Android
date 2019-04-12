@@ -10,4 +10,13 @@ namespace GsbAndroidBundle\Repository;
  */
 class PraticienRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByPraVisiteurDQL($matricule){
+        
+        return $this->createQueryBuilder('m')
+                    ->select("m.praNom , m.praPrenom ")
+                    ->where("m.praVisiteur = ?1")
+                    ->setParameter(1, $matricule)                  
+                    ->getQuery()
+                    ->getResult();        
+    }
 }

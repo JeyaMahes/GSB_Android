@@ -10,4 +10,25 @@ namespace GsbAndroidBundle\Repository;
  */
 class RapportVisiteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getMoisAnnee($matricule){
+       return $this->createQueryBuilder('m')
+                    ->select("m.rapDatevisite")
+                    ->where("m.visMatricule = ?1")
+                    ->setParameter(1, $matricule)                  
+                    ->getQuery()
+                    ->getResult();  
+    }
+    
+    public function getRVByDate($matricule,$date){
+        
+        return $this->createQueryBuilder('m')
+                    ->select("m.rapDatevisite ,m.rapBilan ")
+                    ->where("m.visMatricule = ?1 ")
+                    ->andWhere("m.rapDatevisite = ?2")
+                    ->setParameter(1, $matricule)
+                    ->setParameter(2, $date)
+                    ->getQuery()
+                    ->getResult();  
+        
+    }
 }

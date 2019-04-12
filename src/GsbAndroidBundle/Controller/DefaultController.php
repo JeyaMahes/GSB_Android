@@ -30,8 +30,7 @@ class DefaultController extends Controller
         $repository = $em->getRepository('GsbAndroidBundle:Visiteur');
         $leVisiteur = $repository->findOneBy(array('visLogin'=>$login, 'visMdp'=>$mdp));
         
-        return new Response($leVisiteur->getVisNom()) ;
-        $response = new JsonResponse($leVisiteur);
+        $response = new JsonResponse($leVisiteur->jsonSerialize());
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
@@ -44,8 +43,9 @@ class DefaultController extends Controller
         if (empty($data)) {
             return new JsonResponse(['message'=> 'Liste vide'], Response::HTTP_NOT_FOUND);
         }
+        
         return new JsonResponse($data);
-               
+        
     }
     
     // Idem : tableau d'objets Json
@@ -72,6 +72,20 @@ class DefaultController extends Controller
                 ->serialize($typesPraticiens, 'json');
         
         return new Response($lesTypesPraticiens); 
+    }
+    
+    public function getUnRVAction($matricule){
+        
+        $rp = $this->getDoctrine()->getManager()
+                ->getRepository('GsbAndroidBundle:RapportVisite');
+        
+        $date = $rp->getMoisAnnee($matricule);
+        
+        $dateS = $date[0]["rapDatevisite"]->format('Y-m-d');
+        
+        $rv = $rp->getRVByDate($matricule,$dateS);
+
+        return new JsonResponse($rv);
     }
 
 }

@@ -3,7 +3,7 @@
 namespace GsbAndroidBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use 
+
 
 /**
  * Praticien
@@ -287,5 +287,7 @@ class Praticien implements \JsonSerializable
     {
         return $this->praVisiteur;
     }
-     public function jsonSerialize() {}
+     public function jsonSerialize() {
+          return array('id' => $this->praNum,'Nom Praticien' => $this-> praNom,'Prenom Praticien' => $this->praPrenom);
+     }
 }

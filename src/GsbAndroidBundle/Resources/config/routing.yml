@@ -4,6 +4,17 @@ gsb_android_homepage:
 gsb_connexion:
     path:     /connexion/{login}/{mdp}
     defaults: { _controller: GsbAndroidBundle:Default:getUnVisiteur }
+    
+gsb_ListePraticien:
+    path:    /listePraticien
+    defaults: { _controller: GsbAndroidBundle:Default:getLesPraticiens }
 
     
-
+gsb_ListePraticienParVisiteur:
+    path:   /listePraticienParVisiteur/{matricule}
+    defaults: { _controller: GsbAndroidBundle:Default:getLesPraticiensParVisiteur}
+    
+gsb_ConsulterUnCR:
+    path:   /getUnRV/{matricule}
+    defaults: { _controller: GsbAndroidBundle:Default:getUnRV }
+    
