@@ -22,7 +22,8 @@ class RapportVisiteRepository extends \Doctrine\ORM\EntityRepository
     public function getRVByDate($matricule,$date){
         
         return $this->createQueryBuilder('m' )
-                    ->select("m.rapDatevisite ,m.rapBilan , IDENTITY(m.praNum)")                  
+                    ->select("m.rapDatevisite ,m.rapBilan , IDENTITY(m.praNum) , p.praNom")
+                    ->innerJoin('GsbAndroidBundle:Praticien', 'p' , 'WITH' , 'm.praNum = p.praNum')
                     ->where("m.visMatricule = ?1 ")
                     ->andWhere("m.rapDatevisite = ?2")
                     ->setParameter(1, $matricule)
