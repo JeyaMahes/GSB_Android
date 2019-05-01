@@ -35,64 +35,7 @@ class TypePraticien implements \JsonSerializable
      */
     private $typeLieu;
 
+    public function jsonSerialize() {}
 
-
-    /**
-     * Get typeCode
-     *
-     * @return string
-     */
-    public function getTypeCode()
-    {
-        return $this->typeCode;
-    }
-
-    /**
-     * Set typeLibelle
-     *
-     * @param string $typeLibelle
-     *
-     * @return TypePraticien
-     */
-    public function setTypeLibelle($typeLibelle)
-    {
-        $this->typeLibelle = $typeLibelle;
-
-        return $this;
-    }
-
-    /**
-     * Get typeLibelle
-     *
-     * @return string
-     */
-    public function getTypeLibelle()
-    {
-        return $this->typeLibelle;
-    }
-
-    /**
-     * Set typeLieu
-     *
-     * @param string $typeLieu
-     *
-     * @return TypePraticien
-     */
-    public function setTypeLieu($typeLieu)
-    {
-        $this->typeLieu = $typeLieu;
-
-        return $this;
-    }
-
-    /**
-     * Get typeLieu
-     *
-     * @return string
-     */
-    public function getTypeLieu()
-    {
-        return $this->typeLieu;
-    }
-     public function jsonSerialize() {}
 }
+

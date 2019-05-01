@@ -4,7 +4,6 @@ namespace GsbAndroidBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * Praticien
  *
@@ -20,7 +19,7 @@ class Praticien implements \JsonSerializable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $praNum = '0';
+    private $praNum;
 
     /**
      * @var string
@@ -84,210 +83,9 @@ class Praticien implements \JsonSerializable
      */
     private $praVisiteur;
 
-
-
-    /**
-     * Get praNum
-     *
-     * @return integer
-     */
-    public function getPraNum()
-    {
-        return $this->praNum;
-    }
-
-    /**
-     * Set praNom
-     *
-     * @param string $praNom
-     *
-     * @return Praticien
-     */
-    public function setPraNom($praNom)
-    {
-        $this->praNom = $praNom;
-
-        return $this;
-    }
-
-    /**
-     * Get praNom
-     *
-     * @return string
-     */
-    public function getPraNom()
-    {
-        return $this->praNom;
-    }
-
-    /**
-     * Set praPrenom
-     *
-     * @param string $praPrenom
-     *
-     * @return Praticien
-     */
-    public function setPraPrenom($praPrenom)
-    {
-        $this->praPrenom = $praPrenom;
-
-        return $this;
-    }
-
-    /**
-     * Get praPrenom
-     *
-     * @return string
-     */
-    public function getPraPrenom()
-    {
-        return $this->praPrenom;
-    }
-
-    /**
-     * Set praAdresse
-     *
-     * @param string $praAdresse
-     *
-     * @return Praticien
-     */
-    public function setPraAdresse($praAdresse)
-    {
-        $this->praAdresse = $praAdresse;
-
-        return $this;
-    }
-
-    /**
-     * Get praAdresse
-     *
-     * @return string
-     */
-    public function getPraAdresse()
-    {
-        return $this->praAdresse;
-    }
-
-    /**
-     * Set praCp
-     *
-     * @param string $praCp
-     *
-     * @return Praticien
-     */
-    public function setPraCp($praCp)
-    {
-        $this->praCp = $praCp;
-
-        return $this;
-    }
-
-    /**
-     * Get praCp
-     *
-     * @return string
-     */
-    public function getPraCp()
-    {
-        return $this->praCp;
-    }
-
-    /**
-     * Set praVille
-     *
-     * @param string $praVille
-     *
-     * @return Praticien
-     */
-    public function setPraVille($praVille)
-    {
-        $this->praVille = $praVille;
-
-        return $this;
-    }
-
-    /**
-     * Get praVille
-     *
-     * @return string
-     */
-    public function getPraVille()
-    {
-        return $this->praVille;
-    }
-
-    /**
-     * Set praCoefnotoriete
-     *
-     * @param float $praCoefnotoriete
-     *
-     * @return Praticien
-     */
-    public function setPraCoefnotoriete($praCoefnotoriete)
-    {
-        $this->praCoefnotoriete = $praCoefnotoriete;
-
-        return $this;
-    }
-
-    /**
-     * Get praCoefnotoriete
-     *
-     * @return float
-     */
-    public function getPraCoefnotoriete()
-    {
-        return $this->praCoefnotoriete;
-    }
-
-    /**
-     * Set praTypecode
-     *
-     * @param \GsbAndroidBundle\Entity\TypePraticien $praTypecode
-     *
-     * @return Praticien
-     */
-    public function setPraTypecode(\GsbAndroidBundle\Entity\TypePraticien $praTypecode = null)
-    {
-        $this->praTypecode = $praTypecode;
-
-        return $this;
-    }
-
-    /**
-     * Get praTypecode
-     *
-     * @return \GsbAndroidBundle\Entity\TypePraticien
-     */
-    public function getPraTypecode()
-    {
-        return $this->praTypecode;
-    }
-
-    /**
-     * Set praVisiteur
-     *
-     * @param \GsbAndroidBundle\Entity\Visiteur $praVisiteur
-     *
-     * @return Praticien
-     */
-    public function setPraVisiteur(\GsbAndroidBundle\Entity\Visiteur $praVisiteur = null)
-    {
-        $this->praVisiteur = $praVisiteur;
-
-        return $this;
-    }
-
-    /**
-     * Get praVisiteur
-     *
-     * @return \GsbAndroidBundle\Entity\Visiteur
-     */
-    public function getPraVisiteur()
-    {
-        return $this->praVisiteur;
-    }
      public function jsonSerialize() {
           return array('id' => $this->praNum,'Nom Praticien' => $this-> praNom,'Prenom Praticien' => $this->praPrenom);
      }
+
 }
+
