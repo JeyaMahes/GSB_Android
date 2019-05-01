@@ -21,8 +21,8 @@ class RapportVisiteRepository extends \Doctrine\ORM\EntityRepository
     
     public function getRVByDate($matricule,$date){
         
-        return $this->createQueryBuilder('m')
-                    ->select("m.rapDatevisite ,m.rapBilan ")
+        return $this->createQueryBuilder('m' )
+                    ->select("m.rapDatevisite ,m.rapBilan ")                  
                     ->where("m.visMatricule = ?1 ")
                     ->andWhere("m.rapDatevisite = ?2")
                     ->setParameter(1, $matricule)

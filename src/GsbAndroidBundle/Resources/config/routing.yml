@@ -14,7 +14,14 @@ gsb_ListePraticienParVisiteur:
     path:   /listePraticienParVisiteur/{matricule}
     defaults: { _controller: GsbAndroidBundle:Default:getLesPraticiensParVisiteur}
     
+gsb_DateRV:
+    path: /getUneDate/{matricule}
+    defaults: { _controller: GsbAndroidBundle:Default:getUneDate }
+
 gsb_ConsulterUnCR:
-    path:   /getUnRV/{matricule}
+    path:   /getUnRV/{matricule}/{date}
     defaults: { _controller: GsbAndroidBundle:Default:getUnRV }
     
+gsb_AjouterRV:
+    path:   /addUnRV
+    defaults: { _controller: GsbAndroidBundle:Default:addUnRV }

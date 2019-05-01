@@ -74,19 +74,94 @@ class DefaultController extends Controller
         return new Response($lesTypesPraticiens); 
     }
     
-    public function getUnRVAction($matricule){
-        
-        $rp = $this->getDoctrine()->getManager()
+    public function getUneDateAction($matricule){
+      $rp = $this->getDoctrine()->getManager()
                 ->getRepository('GsbAndroidBundle:RapportVisite');
         
         $date = $rp->getMoisAnnee($matricule);
         
-        $dateS = $date[0]["rapDatevisite"]->format('Y-m-d');
+        foreach( $date as $uneDate){
+            $uneDate = $uneDate["rapDatevisite"]->format('Y-m-d');
+        }
         
-        $rv = $rp->getRVByDate($matricule,$dateS);
+        
+        return new JsonResponse ( $uneDate);
+        
+    }
+    public function getUnRVAction($matricule , $date){
+        
+        $rp = $this->getDoctrine()->getManager()
+                ->getRepository('GsbAndroidBundle:RapportVisite');
+        
+        
+             
+        $rv = $rp->getRVByDate($matricule,$date);
 
         return new JsonResponse($rv);
     }
-
+    
+    public function addUnPraticienAction(Request $request) {
+            $content = $request->request->get('praticien');
+            
+            if (!empty($content)) {
+                $data = json_decode($content, true);
+                
+                $praticien = new Praticien();
+                $praticien->setPraNom($data['praNom']);       
+                $praticien->setPraPrenom($data['praPrenom']);
+                $praticien->setPraAdresse($data['praAdresse']);
+                $praticien->setPraCp($data['praCp']);
+                $praticien->setPraVille($data['praVille']);
+                $praticien->setPraCoefnotoriete($data['praCoefNotoriete']);
+            
+                $em = $this->getDoctrine()->getManager();
+            
+                // Entity praTypeCode
+                $rpTypePraticien = $em->getRepository('VolleyBundle:TypePraticien');
+                $praTypeCode = $rpTypePraticien->findOneBy(
+                            array('typeCode'=> $data['praTypeCode']));
+                $praticien->setPraTypecode($praTypeCode); 
+                $rpVisiteur = $em->getRepository('VolleyBundle:Visiteur');
+                $praVisiteur = $rpVisiteur->findOneBy(
+                            array('visMatricule'=> $data['praVisiteur']));
+                $praticien->setPraVisiteur($praVisiteur); 
+                $em->persist($praticien);
+                $em->flush();
+                
+            } else {
+                throw new BadRequestHttpException("Contenu vide");
+            }
+            
+            return new JsonResponse($praticien);
+    }
+    
+    public function addUnRVAction(Request $request){
+        
+        $content = $request->request->get('rapportvisite');
+            
+            if (!empty($content)) {
+                $data = json_decode($content, true);
+                
+                $em= $this->getDoctrine()->getManager();
+                $rv = new RapportVisite();
+                $rv->setRapBilan($data['rapBilan']);
+                $rv->setPraNum($data['praNum']);
+                $rv->setRapDateVisite($data['rapDatevisite']);
+                $rv->setRapDateRapport($data['rapDaterapport']);
+                $rv->setVisMatricule($data['visMatricule']);
+                
+                $em->persist($rv);
+                $em->flush();
+            } else {
+                throw new BadRequestHttpException("Contenu vide");
+            }
+            
+            return new JsonResponse($rv);
+    }
+    
+            
 }
+ 
+
+
 
